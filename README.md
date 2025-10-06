@@ -7,18 +7,18 @@
 ## 🎯 Objective
 
 In this mini-project you will:
-- Understand the concept of **exploration vs. exploitation** through a practical experiment.
-- Implement your own **Multi-Armed Bandit (MAB)** algorithm.
-- Test how well it performs on a simulated environment.
+- Understand the concept of **exploration vs exploitation** through a practical experiment.  
+- Implement your own **Multi-Armed Bandit (MAB)** algorithm.  
+- Test how well it performs on a simulated environment.  
 - Compete (friendly!) with your classmates in a final evaluation.
 
-This is your **first Python project** for this course, so the goal is not just to win — it’s to **learn by doing**.
+This is your **first Python project**, so the goal is not just to win — it’s to **learn by doing**.
 
 ---
 
 ## 🧩 What Is a Multi-Armed Bandit?
 
-Imagine you enter a casino with 10 slot machines (the “arms”).  
+Imagine you enter a casino with 10 slot machines (“arms”).  
 Each arm gives a reward when you pull it, but the average reward is **different and unknown**.  
 Your mission is to find a strategy that maximizes your total reward:
 - **Explore** → try different arms to gather information.  
@@ -29,8 +29,6 @@ That’s exactly what you’ll do in code!
 ---
 
 ## 📁 Project Structure
-
-After unzipping this folder, you’ll see:
 
 ```
 mab-hackathon-student/
@@ -52,23 +50,65 @@ mab-hackathon-student/
 
 You only need:
 - **Python 3.10 or higher**
-- **Pip (Python package manager)**
+- **Pip** (Python package manager)
 
-If you don’t have them yet:
-- [Download Python here](https://www.python.org/downloads/)  
-- During installation, **tick “Add Python to PATH”**
+If you don’t have them yet:  
+👉 [Download Python](https://www.python.org/downloads/) and tick **“Add Python to PATH”** during installation.
 
 ---
 
 ## ⚙️ Installing Dependencies
 
-Open a terminal (or command prompt) inside the project folder and run:
+Open a terminal inside the project folder and run:
 
 ```bash
 pip install numpy matplotlib
 ```
 
 That’s all you need — these libraries handle math and plotting.
+
+---
+
+## 🧰 Option A — Recommended Setup (Virtual Environment)
+
+To avoid conflicts with other Python packages on your computer, we’ll use a **virtual environment**.  
+Run these commands from the project’s root directory (`mab-hackathon-student/`):
+
+```bash
+# 1️⃣  Create a virtual environment
+python3 -m venv .venv
+
+# 2️⃣  Activate it
+# macOS / Linux
+source .venv/bin/activate
+# Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+
+# 3️⃣  Upgrade pip and install dependencies inside it
+python -m pip install --upgrade pip
+pip install numpy matplotlib
+```
+
+You only need to do this **once**.  
+Next time you work on the project:
+
+```bash
+source .venv/bin/activate          # macOS / Linux
+# or
+.venv\Scripts\Activate.ps1         # Windows
+```
+
+Then run:
+
+```bash
+python student_sandbox/quick_test.py
+```
+
+To exit the environment:
+
+```bash
+deactivate
+```
 
 ---
 
@@ -225,23 +265,6 @@ submissions/my_agent.py
 
 No other files are needed.  
 The professor will test it on hidden environments.
-
----
-
-## 🧩 Understanding the API (Advanced Reference)
-
-When the professor runs your agent, this happens under the hood:
-
-```python
-for t in range(steps):
-    a = agent.select_arm()
-    reward, info = env.step(a)
-    agent.update(a, reward, info)
-```
-
-That’s why:
-- `select_arm()` must **return an integer** (the arm index).
-- `update()` must **receive** the `arm` and the `reward`.
 
 ---
 
