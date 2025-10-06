@@ -25,9 +25,18 @@ def run(agent_factory, episodes=20, steps=1000, seed=7):
     return avg_r
 
 if __name__ == "__main__":
-    agent_path = os.path.join(os.path.dirname(__file__), "..", "submissions", "my_agent.py")
+    here = os.path.dirname(__file__)
+    my_agent = os.path.join(here, "..", "submissions", "my_agent.py")
+    template = os.path.join(here, "..", "submissions", "template_agent.py")
+
+    agent_path = my_agent if os.path.exists(my_agent) else template
+    if agent_path == template:
+        print("[INFO] No my_agent.py found — using template_agent.py instead.")
+        print("       Create it with: cp submissions/template_agent.py submissions/my_agent.py")
+
     mod = load_student(agent_path)
     rewards = run(mod.create_agent, episodes=20, steps=1000, seed=7)
+
     plt.figure(figsize=(7,4.5))
     plt.plot(rewards, label=f"{mod.ALGO_NAME}")
     plt.xlabel("Step"); plt.ylabel("Average reward"); plt.title("Student sandbox — average reward")
